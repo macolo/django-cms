@@ -1,0 +1,16 @@
+name: django CMS docs.yml
+
+on: [push]
+
+jobs:
+  docs:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: run docs test
+        run: |
+          nvm install 6 && nvm use 6
+          npm config set spin false
+          npm install -g gulp@3.9.1
+          scripts/install-npm-dependencies.sh
+          gulp tests:unit
+          gulp lint
